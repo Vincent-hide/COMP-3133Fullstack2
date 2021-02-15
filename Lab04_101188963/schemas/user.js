@@ -7,8 +7,28 @@ const Regex = {
   zip: /\d{5}-\d{4}/,
 }
 
-// create product schema
-let userSchema = mongoose.Schema({
+const addressSchema = mongoose.Schema({
+  city: {
+    type: String,
+    trim: true,
+    validate: {
+      validator: Regex.city,
+      message: "Heyyy wrong city name"
+    },
+    required:  [true, "city required"],
+  },
+  zipcode: {
+    type: String,
+    trim: true,
+    validate: {
+      validator: Regex.zip,
+      message: "Heyyyyyyy wrong zip"
+    },
+    required: [true, "zip is required"]
+  }
+})
+
+const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, "username required"],
@@ -18,6 +38,7 @@ let userSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, "email required"],
+    trim: true,
     validate:{
       validator: isEmail,
       message: 'Heyyy: {VALUE} is not a valid email',
@@ -26,6 +47,7 @@ let userSchema = mongoose.Schema({
   },
   phone: {
     type: String,
+    trim: true,
     validate: {
       validator: (value) => {
         return /\d{1}-\d{3}-\d{3}-\d{3}/.test(value);
@@ -34,30 +56,16 @@ let userSchema = mongoose.Schema({
     },
     required: [true, "phone required"],
   },
-  city: {
+  website: {
     type: String,
-    validate: {
-      validator: Regex.city,
-      message: "Heyyy wrong city name"
-    },
-    required:  [true, "city required"],
-  },
-  web: {
-    type: String,
+    trim: true,
     validate: {
       validator: Regex.web,
       message: "Heyyyyyyy wrong web link"
     },
     required: [true, "web link is required"]
   },
-  zip: {
-    type: String,
-    validate: {
-      validator: Regex.zip,
-      message: "Heyyyyyyy wrong zip"
-    },
-    required: [true, "zip is required"]
-  }
+  address: addressSchema,
   // gender: {
   //   type: String,
   //   required: [true, "Category required"],
@@ -74,5 +82,16 @@ let userSchema = mongoose.Schema({
   //   min: [0, "Minimun quantity is zero"],
   // },
 }, {timestamp: true});
+
+userSchema.pre("save", doc => console.log(`pre save: ${doc._id}`));
+
+userSchema.post("init", doc => console.log(`init: ${doc._id}`));
+userSchema.post("validate", doc => console.log(`validate: ${doc._id}`));
+userSchema.post("saved", doc => console.log(`saved: ${doc._id}`));
+userSchema.post("remove", doc => console.log(`remove: ${doc._id}`));
+
+userSchema.methods.customFunction = () => {
+  console.log("Custom function!!");
+}
 
 module.exports = mongoose.model("User", userSchema);

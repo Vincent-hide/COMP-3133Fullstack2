@@ -2,7 +2,7 @@ const express = require('express')
 const User = require("./schemas/user.js");
 const mongoose = require("mongoose");
 
-
+const users = require("./UserData.json");
 
 const app = express()
 const port = 9000
@@ -12,8 +12,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-  // const newUsers = new User(user);
-  newUsers.save();
+  users.map(async user => {
+    console.log(user, "\n\n\n");
+    const newUser = new User(user);
+    newUser.customFunction();
+    await newUser.save();
+  })
+
   res.send('Saveing!')
 });
 
