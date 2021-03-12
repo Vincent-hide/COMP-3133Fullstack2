@@ -1,5 +1,5 @@
 import { Customer } from "./Customer";
 
-let customer = new Customer("Alec", "Pagliarussi", 23);
+const customer = new Customer("Suho", "Kang", 29);
 customer.greeter();
 customer.getAge();
