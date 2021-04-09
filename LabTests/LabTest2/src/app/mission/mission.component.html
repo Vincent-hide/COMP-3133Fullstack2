@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="box">
+    <ul>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Flight Number</mat-chip> {{mission.flight_number}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Crew</mat-chip> {{mission.crew || "NA"}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Details</mat-chip> {{mission.details}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Is tentative</mat-chip> {{mission.is_tentative}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+           <mat-chip color="primary" selected>Launch date local</mat-chip> {{mission.launch_date_local}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Mission Name</mat-chip> {{mission.mission_name}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Launch_year</mat-chip> {{mission.launch_year}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Tentative max precision</mat-chip> {{mission.tentative_max_precision}}
+        </mat-chip-list>
+      </li>
+      <li>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Launch date utc</mat-chip> {{mission.launch_date_utc}}
+        </mat-chip-list>
+      </li>
+    </ul>
+  </div>
+</div>
+
